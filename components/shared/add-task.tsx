@@ -35,7 +35,7 @@ import {
 } from "../ui/select";
 import { Badge } from "../ui/badge";
 import { taskTable } from "@/hooks/database.config";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useToast } from "../ui/use-toast";
 
 const AddTask = () => {
@@ -65,7 +65,7 @@ const AddTask = () => {
             toast({
                 title: "Added Task",
             });
-            router.push("/");
+            redirect("/");
         } catch (error) {
             console.error("Failed to add.");
         }

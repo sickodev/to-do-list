@@ -38,6 +38,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { Pencil2Icon, TrashIcon } from "@radix-ui/react-icons";
 import Comment from "./comment";
+import { useToast } from "../ui/use-toast";
 
 type Props = {
     task: {
@@ -49,6 +50,7 @@ type Props = {
 
 const TaskCard = ({ task }: Props) => {
     const statusColor = getStatusColor(task.status);
+    const { toast } = useToast();
 
     const router = useRouter();
 
@@ -74,6 +76,9 @@ const TaskCard = ({ task }: Props) => {
         try {
             await taskTable.update(task.id, values);
             form.reset();
+            toast({
+                title: "Edited Task",
+            });
             router.push("/");
         } catch (error) {
             console.error("Failed to edit.");
